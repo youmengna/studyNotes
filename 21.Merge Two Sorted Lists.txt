@@ -1,0 +1,25 @@
+21. Merge Two Sorted Lists
+Merge two sorted linked lists and return it as a new list. The new list 
+should be made by splicing together the nodes of the first two lists.
+
+这道题关键使用了prev指针，可以往后移动
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode ans = new ListNode(0);   //ans相当于头指针
+    ListNode prev = ans;
+    while(l1 != null && l2 != null){
+        if(l1.val > l2.val){
+            prev.next = l2;
+            l2 = l2.next;
+        } else{
+            prev.next = l1;
+            l1 = l1.next;
+        }
+        prev = prev.next;
+    }
+    if(l2 == null){
+        prev.next = l1;
+    } else {
+        prev.next = l2;
+    }
+    return ans.next;
+}
